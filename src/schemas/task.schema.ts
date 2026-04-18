@@ -6,7 +6,10 @@ export const createTaskSchema = z.object({
     description: z.string().optional().default(""),
     status: z.enum(["pending", "in-progress", "done"]),
     priority: z.enum(["low", "medium", "high"]).optional(),
-    dueDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format").optional()
+    dueDate: z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format")
+      .optional(),
   }),
 });
 
@@ -16,6 +19,10 @@ export const updateTaskSchema = z.object({
     description: z.string().optional(),
     status: z.enum(["pending", "in-progress", "done"]).optional(),
     priority: z.enum(["low", "medium", "high"]).optional(),
-    dueDate: z.string().datetime().nullable()
+    dueDate: z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format")
+      .optional()
+      .nullable(),
   }),
 });

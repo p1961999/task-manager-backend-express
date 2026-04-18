@@ -10,10 +10,20 @@ const morgan_1 = __importDefault(require("morgan"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const routes_1 = __importDefault(require("./routes"));
 const error_middleware_1 = require("./middlewares/error.middleware");
-const env_1 = require("./config/env");
 const app = (0, express_1.default)();
+const allowedOrigins = [
+    "http://localhost:3000",
+    "https://task-manager-frontend-nextjs.netlify.app"
+];
 app.use((0, cors_1.default)({
-    origin: env_1.env.CLIENT_URL,
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error(`CORS not allowed for origin: ${origin}`));
+        }
+    },
     credentials: true
 }));
 app.use((0, helmet_1.default)());

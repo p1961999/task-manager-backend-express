@@ -8,7 +8,10 @@ exports.createTaskSchema = zod_1.z.object({
         description: zod_1.z.string().optional().default(""),
         status: zod_1.z.enum(["pending", "in-progress", "done"]),
         priority: zod_1.z.enum(["low", "medium", "high"]).optional(),
-        dueDate: zod_1.z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format").optional()
+        dueDate: zod_1.z
+            .string()
+            .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format")
+            .optional(),
     }),
 });
 exports.updateTaskSchema = zod_1.z.object({
@@ -17,6 +20,10 @@ exports.updateTaskSchema = zod_1.z.object({
         description: zod_1.z.string().optional(),
         status: zod_1.z.enum(["pending", "in-progress", "done"]).optional(),
         priority: zod_1.z.enum(["low", "medium", "high"]).optional(),
-        dueDate: zod_1.z.string().datetime().nullable()
+        dueDate: zod_1.z
+            .string()
+            .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format")
+            .optional()
+            .nullable(),
     }),
 });
